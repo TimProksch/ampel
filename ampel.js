@@ -41,9 +41,9 @@ let checkBuildState = (callback) => {
          let status = x.getAttribute('status');
          console.log(status);
          callback(status);
-    	})
-    })
- }
+    	});
+    });
+ };
 
 checkBuildState(changeLights);
 setInterval(checkBuildState, 300000, changeLights);
@@ -60,19 +60,19 @@ fun = (req, res) => {
   var onof = par[2];
   if (light ==="red") {
     var colour = 0;
-  }
+  };
   if (light === "yellow" ) {
     var colour = 1;
-  }
+  };
   if (light === "green"){
     var colour = 2 ;
-  } 
+  };
   function l(light) {
   cmd = spawn( './clewarecontrol.cmd',  ["-c" , "1" , "-as" , colour , onof ]);
           cmd.stdout.on( 'data', data => console.log( `stdout: ${data}` ) );
           cmd.stderr.on( 'data', data => console.log( `stderr: ${data}` ) );
           cmd.on( 'error', code => console.log( `child process exited with code ${code}` ) );
-  }
+  };
   switch (light){
    case "update":
    checkBuildState(changeLights);
@@ -95,7 +95,7 @@ fun = (req, res) => {
           break
        default:
         console.log("Cant find colour please only use red, yellow or green");
-      }
+      };
      break
      case "1":
       switch (light) {
@@ -110,15 +110,15 @@ fun = (req, res) => {
           break
        default:
           console.log("Cant find colour please only use red, yellow or green");
-      }        
+      };    
      break
      default:
           console.log("please enter 1 for the light to turn on or 0 to turn it off");
-  }		      		
+  };     		
 res.end('\n');
-}
-}
+};
+};
 const server = http.createServer(fun);
 server.listen(port, hostname, () => {
-console.log(`Server running at http://${hostname}:${port}/`)
-})
+console.log(`Server running at http://${hostname}:${port}/`);
+});
